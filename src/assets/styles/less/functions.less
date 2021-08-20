@@ -1,0 +1,130 @@
+.selfColor(@color: red) {
+    border-color: @color;
+}
+
+.border() {
+    border:2px solid green;
+}
+
+// 1像素边框
+// .boder_1px(@position before) {
+//     position: relative;
+//     &:@{position} {
+//         content: '';
+//         position: absolute;
+//         top: 0;
+//         height: 1px;
+//         width: 100%;
+//         background-color: #000;
+//         transform-origin: 50% 0%;
+//         @media only screen {
+//             @media (-webkit-min-device-pixel-ratio:2){
+//                 transform: scaleY(0.5);
+//             }
+//         }
+//         @media only screen {
+//             @media (-webkit-min-device-pixel-ratio:3){
+//                 transform: scaleY(0.33);
+//             }
+//         }
+       
+//     }
+// }
+
+// 1像素边框
+// .border-1px-after(@radius: 2px) {
+//     pointer-events: none;
+//     display: block;
+//     position: absolute;
+//     border-radius: @radius;
+//     box-sizing: border-box;
+//     width: 100%;
+//     height: 100%;
+//     left: 0;
+//     top: 0;
+//     transform-origin: 0 0;
+//     content: '';
+//     @media only screen {
+//         @media (-webkit-min-device-pixel-ratio:2){
+//             width: 200%;
+//             height: 200%;
+//             border-radius: @radius * 2;
+//             transform: scale(.5);
+//         }
+//     }
+//     @media only screen {
+//         @media (-webkit-min-device-pixel-ratio:3){
+//             width: 300%;
+//             height: 300%;
+//             border-radius: @radius * 3;
+//             transform: scale(.333);
+//         }
+//     }
+// }
+
+// .border-1px(@color: #ccc, @radius: 2px) {
+//   position: relative;
+//   &:after {
+//     .border-1px-after(@radius);
+//     border: 1px solid @color;
+//   }
+// }
+
+.border-1px(@color: #ccc, @radius: 2px, @direction: all) {
+    position: relative;
+    &:after {
+        pointer-events: none;
+        display: block;
+        position: absolute;
+        border-radius: @radius;
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        transform-origin: 0 0;
+        content: '';
+        & when (@direction = all) {
+            border: 1px solid @color;
+        }
+        & when not (@direction = all) {
+            border-@{direction}: 1px solid @color;
+        }
+        @media only screen {
+            @media (-webkit-min-device-pixel-ratio:2){
+                width: 200%;
+                height: 200%;
+                border-radius: @radius * 2;
+                transform: scale(.5);
+            }
+        }
+        @media only screen {
+            @media (-webkit-min-device-pixel-ratio:3){
+                width: 300%;
+                height: 300%;
+                border-radius: @radius * 3;
+                transform: scale(.333);
+            }
+        }
+    }
+  }
+
+// 选择2倍、3倍图片
+// 语法：~'@{变量名}其它字符串'
+.avatar(@image_name) {
+    background-image: ~'url(@{image_name})';
+    @media only screen {
+        @media (-webkit-min-device-pixel-ratio:2){
+             background-image: ~'url(@{image_name})';
+        }
+    }
+    @media only screen {
+        @media (-webkit-min-device-pixel-ratio:3){
+             background-image: ~'url(@{pic_name})';
+        }
+    }
+}
+
+
+
+
